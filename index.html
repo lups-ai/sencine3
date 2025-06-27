@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENCINE - Tu Plataforma de Streaming</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff4757, #3742fa, #ff4757, #3742fa);
+            background-size: 400% 400%;
+            animation: gradientMove 8s ease infinite;
+            min-height: 100vh;
+            color: white;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Menu */
+        .sidebar {
+            width: 250px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+
+        .sidebar h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            color: #ff4757;
+            font-size: 1.5rem;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 71, 87, 0.3);
+            transform: translateX(10px);
+        }
+
+        .menu-item.active {
+            background: rgba(255, 71, 87, 0.5);
+            border-left: 4px solid #ff4757;
+        }
+
+        .menu-icon {
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 0;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 71, 87, 0.5); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Featured Carousel */
+        .featured-section {
+            margin-bottom: 50px;
+        }
+
+        .carousel-container {
+            position: relative;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .movie-slide {
+            min-width: 33.333%;
+            padding: 0 10px;
+        }
+
+        .movie-card {
+            background: linear-gradient(45deg, #2c2c2c, #404040);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #ff4757, #3742fa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .movie-info {
+            padding: 15px;
+        }
+
+        .movie-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .movie-genre {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Carousel Controls */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 71, 87, 0.8);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 71, 87, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn.prev {
+            left: 20px;
+        }
+
+        .carousel-btn.next {
+            right: 20px;
+        }
+
+        /* Categories Section */
+        .categories-section {
+            margin-bottom: 50px;
+        }
+
+        .categories-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .category-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 71, 87, 0.5);
+        }
+
+        .category-card.active {
+            border: 2px solid #ff4757;
+            background: rgba(255, 71, 87, 0.2);
+        }
+
+        .category-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .category-description {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .category-count {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff4757;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 40px;
+        }
+
+        .content-section.category-content {
+            display: none;
+        }
+
+        .content-section.category-content.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .content-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-poster {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #3742fa, #ff4757);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .content-info {
+            padding: 15px;
+        }
+
+        .content-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .content-description {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: rgba(255, 71, 87, 0.9);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.visible {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 80px 15px 20px 15px;
+            }
+
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .movie-slide {
+                min-width: 100%;
+            }
+
+            .categories-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .content-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .carousel-container {
+                padding: 20px;
+            }
+
+            .category-icon {
+                font-size: 3rem;
+            }
+
+            .category-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2rem;
+            }
+
+            .content-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .categories-container {
+                gap: 15px;
+            }
+
+            .category-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    
+    <div class="container">
+        <!-- Sidebar Menu -->
+        <aside class="sidebar" id="sidebar">
+            <h2>MENÚ</h2>
+            <a href="#" class="menu-item active">
+                <span class="menu-icon">🏠</span>
+                <span>Inicio</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon">🎬</span>
+                <span>Películas</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon">📺</span>
+                <span>Series</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon">🔥</span>
+                <span>Tendencias</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon">📋</span>
+                <span>Mi Lista</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon">🎭</span>
+                <span>Géneros</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon">⚙️</span>
+                <span>Configuración</span>
+            </a>
+            <a href="#" class="menu-item">
+                <span class="menu-icon">👤</span>
+                <span>Perfil</span>
+            </a>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- Header -->
+            <header class="header">
+                <h1 class="logo">SENCINE</h1>
+                <p class="subtitle">Tu experiencia cinematográfica definitiva</p>
+            </header>
+
+            <!-- Featured Carousel -->
+            <section class="featured-section">
+                <div class="carousel-container">
+                    <div class="carousel">
+                        <div class="carousel-track" id="carouselTrack">
+                            <div class="movie-slide">
+                                <div class="movie-card" onclick="window.open('https://youtu.be/zPTCp5wni38?si=31N5tJCpKj-PHpRr', '_blank')" >
+                                    <div class="movie-poster">PELÍCULA 1</div>
+                                    <div class="movie-info">
+                                        <div class="movie-title">El Gran Escape</div>
+                                        <div class="movie-genre">Acción • Drama</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="movie-slide">
+                                <div class="movie-card">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/r-Zn_keL9HQ?si=YHpnDLMjZHqeUwhl&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <div class="movie-slide">
+                                <div class="movie-card">
+                                    <div class="movie-poster">PELÍCULA 3</div>
+                                    <div class="movie-info">
+                                        <div class="movie-title">Aventura Espacial</div>
+                                        <div class="movie-genre">Ciencia Ficción</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="movie-slide">
+                                <div class="movie-card">
+                                    <div class="movie-poster">PELÍCULA 4</div>
+                                    <div class="movie-info">
+                                        <div class="movie-title">La Última Misión</div>
+                                        <div class="movie-genre">Acción • Thriller</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="movie-slide">
+                                <div class="movie-card">
+                                    <div class="movie-poster">PELÍCULA 5</div>
+                                    <div class="movie-info">
+                                        <div class="movie-title">Misterio en la Ciudad</div>
+                                        <div class="movie-genre">Misterio • Suspense</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="movie-slide">
+                                <div class="movie-card">
+                                    <div class="movie-poster">PELÍCULA 6</div>
+                                    <div class="movie-info">
+                                        <div class="movie-title">Comedia Familiar</div>
+                                        <div class="movie-genre">Comedia • Familia</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn prev" onclick="moveCarousel(-1)">‹</button>
+                    <button class="carousel-btn next" onclick="moveCarousel(1)">›</button>
+                </div>
+            </section>
+
+            <!-- Lo Más Visto -->
+            <section class="content-section">
+                <h2 class="section-title">Lo Más Visto</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="content-poster">TOP 1</div>
+                        <div class="content-info">
+                            <div class="content-title">El Fenómeno</div>
+                            <div class="content-description">La película más vista de la semana</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">TOP 2</div>
+                        <div class="content-info">
+                            <div class="content-title">Caminos Cruzados</div>
+                            <div class="content-description">Drama que conquista corazones</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">TOP 3</div>
+                        <div class="content-info">
+                            <div class="content-title">Risas Infinitas</div>
+                            <div class="content-description">Comedia para toda la familia</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">TOP 4</div>
+                        <div class="content-info">
+                            <div class="content-title">El Guardián</div>
+                            <div class="content-description">Acción que te mantiene al borde</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">TOP 5</div>
+                        <div class="content-info">
+                            <div class="content-title">Misterio Nocturno</div>
+                            <div class="content-description">Suspenso que no te deja dormir</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">TOP 6</div>
+                        <div class="content-info">
+                            <div class="content-title">Amor Eterno</div>
+                            <div class="content-description">Romance que emociona</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories Section -->
+            <section class="categories-section">
+                <h2 class="section-title">Categorías</h2>
+                <div class="categories-container">
+                    <div class="category-card active" onclick="showCategory('animacion')">
+                        <span class="category-icon">🎨</span>
+                        <h3 class="category-title">Animación</h3>
+                        <p class="category-description">Aventuras animadas para toda la familia</p>
+                        <div class="category-count">24</div>
+                    </div>
+                    <div class="category-card" onclick="showCategory('cortometrajes')">
+                        <span class="category-icon">🎬</span>
+                        <h3 class="category-title">Cortometrajes</h3>
+                        <p class="category-description">Historias intensas en formato corto</p>
+                        <div class="category-count">18</div>
+                    </div>
+                    <div class="category-card" onclick="showCategory('filminutos')">
+                        <span class="category-icon">⚡</span>
+                        <h3 class="category-title">Filminutos</h3>
+                        <p class="category-description">Emociones concentradas en minutos</p>
+                        <div class="category-count">32</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Animación Content -->
+            <section class="content-section category-content active" id="animacion">
+                <h2 class="section-title">Animación</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="content-poster">ANIM 1</div>
+                        <div class="content-info">
+                            <div class="content-title">Mundo Mágico</div>
+                            <div class="content-description">Aventura animada llena de magia</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">ANIM 2</div>
+                        <div class="content-info">
+                            <div class="content-title">Los Pequeños Héroes</div>
+                            <div class="content-description">Historia de amistad y valor</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">ANIM 3</div>
+                        <div class="content-info">
+                            <div class="content-title">Océano Azul</div>
+                            <div class="content-description">Aventura submarina fascinante</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">ANIM 4</div>
+                        <div class="content-info">
+                            <div class="content-title">Viaje a las Estrellas</div>
+                            <div class="content-description">Exploración espacial animada</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">ANIM 5</div>
+                        <div class="content-info">
+                            <div class="content-title">Reino Fantástico</div>
+                            <div class="content-description">Princesas y dragones modernos</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">ANIM 6</div>
+                        <div class="content-info">
+                            <div class="content-title">Robot Amigo</div>
+                            <div class="content-description">Amistad entre humanos y robots</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cortometrajes Content -->
+            <section class="content-section category-content" id="cortometrajes">
+                <h2 class="section-title">Cortometrajes</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="content-poster">CORTO 1</div>
+                        <div class="content-info">
+                            <div class="content-title">Momentos</div>
+                            <div class="content-description">Drama intenso en 15 minutos</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">CORTO 2</div>
+                        <div class="content-info">
+                            <div class="content-title">La Decisión</div>
+                            <div class="content-description">Thriller psicológico breve</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">CORTO 3</div>
+                        <div class="content-info">
+                            <div class="content-title">Recuerdos</div>
+                            <div class="content-description">Historia emotiva y nostálgica</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">CORTO 4</div>
+                        <div class="content-info">
+                            <div class="content-title">El Encuentro</div>
+                            <div class="content-description">Romance en formato corto</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">CORTO 5</div>
+                        <div class="content-info">
+                            <div class="content-title">Despertar</div>
+                            <div class="content-description">Ciencia ficción contemplativa</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">CORTO 6</div>
+                        <div class="content-info">
+                            <div class="content-title">Silencio</div>
+                            <div class="content-description">Drama sin diálogos</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filminutos Content -->
+            <section class="content-section category-content" id="filminutos">
+                <h2 class="section-title">Filminutos</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="content-poster">MIN 1</div>
+                        <div class="content-info">
+                            <div class="content-title">Flash</div>
+                            <div class="content-description">Historia completa en 1 minuto</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">MIN 2</div>
+                        <div class="content-info">
+                            <div class="content-title">Velocidad</div>
+                            <div class="content-description">Acción concentrada</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">MIN 3</div>
+                        <div class="content-info">
+                            <div class="content-title">Instante</div>
+                            <div class="content-description">Emociones en segundos</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">MIN 4</div>
+                        <div class="content-info">
+                            <div class="content-title">Chispa</div>
+                            <div class="content-description">Comedia ultra rápida</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">MIN 5</div>
+                        <div class="content-info">
+                            <div class="content-title">Rayo</div>
+                            <div class="content-description">Suspenso en 30 segundos</div>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-poster">MIN 6</div>
+                        <div class="content-info">
+                            <div class="content-title">Micro</div>
+                            <div class="content-description">Drama microscópico</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Carousel functionality
+        let currentSlide = 0;
+        const totalSlides = 6;
+        const slidesToShow = 3;
+        const maxSlides = totalSlides - slidesToShow;
+
+        function moveCarousel(direction) {
+            const track = document.getElementById('carouselTrack');
+            
+            currentSlide += direction;
+            
+            if (currentSlide < 0) {
+                currentSlide = maxSlides;
+            } else if (currentSlide > maxSlides) {
+                currentSlide = 0;
+            }
+            
+            const translateX = -currentSlide * (100 / slidesToShow);
+            track.style.transform = `translateX(${translateX}%)`;
+        }
+
+        // Auto-play carousel
+        setInterval(() => {
+            moveCarousel(1);
+        }, 5000);
+
+        // Category switching functionality
+        function showCategory(categoryId) {
+            // Hide all category content sections
+            const sections = document.querySelectorAll('.content-section.category-content');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected category section
+            document.getElementById(categoryId).classList.add('active');
+
+            // Update category card active state
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach(card => {
+                card.classList.remove('active');
+            });
+
+            // Add active class to clicked category
+            event.target.closest('.category-card').classList.add('active');
+        }
+
+        // Sidebar toggle for mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            
+            sidebar.classList.toggle('visible');
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                !sidebar.contains(e.target) && 
+                !menuToggle.contains(e.target) && 
+                sidebar.classList.contains('visible')) {
+                sidebar.classList.remove('visible');
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('visible');
+                sidebar.classList.remove('hidden');
+            }
+            
+            // Adjust carousel for mobile
+            if (window.innerWidth <= 768) {
+                const track = document.getElementById('carouselTrack');
+                currentSlide = 0;
+                track.style.transform = 'translateX(0%)';
+            }
+        });
+
+        // Menu item interactions
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all items
+                document.querySelectorAll('.menu-item').forEach(menuItem => {
+                    menuItem.classList.remove('active');
+                });
+                
+                // Add active class to clicked item
+                item.classList.add('active');
+                
+                // Close sidebar on mobile after selection
+                if (window.innerWidth <= 768) {
+                    document.getElementById('sidebar').classList.remove('visible');
+                }
+            });
+        });
+
+        // Add hover effects to content cards
+        document.querySelectorAll('.content-card, .movie-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Smooth scrolling for better UX
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Initialize responsive carousel
+        function initResponsiveCarousel() {
+            const track = document.getElementById('carouselTrack');
+            if (window.innerWidth <= 768) {
+                // Mobile: show 1 slide at a time
+                currentSlide = 0;
+                track.style.transform = 'translateX(0%)';
+            }
+        }
+
+        // Call on load
+        window.addEventListener('load', initResponsiveCarousel);
+    </script>
+</body>
+</html>
