@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(45deg, #ff4757, #3742fa, #ff4757, #3742fa);
+            background: linear-gradient(45deg, #c1eb07, #02086b, #7ebbf5, #ff00c8);
             background-size: 400% 400%;
             animation: gradientMove 8s ease infinite;
             min-height: 100vh;
@@ -34,7 +34,7 @@
         /* Sidebar Menu */
         .sidebar {
             width: 250px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgb(255, 255, 255);
             backdrop-filter: blur(10px);
             padding: 20px;
             position: fixed;
@@ -52,7 +52,7 @@
         .sidebar h2 {
             margin-bottom: 30px;
             text-align: center;
-            color: #ff4757;
+            color: #7e0901;
             font-size: 1.5rem;
         }
 
@@ -65,16 +65,17 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
-            color: white;
+            color: rgb(133, 39, 39);
         }
 
         .menu-item:hover {
-            background: rgba(255, 71, 87, 0.3);
+            background: linear-gradient(45deg, #8B0000, #1a1a2e, #16213e, #0f3460, #8B0000);
             transform: translateX(10px);
+            color: white;
         }
 
         .menu-item.active {
-            background: rgba(255, 71, 87, 0.5);
+            background: rgb(5, 10, 90);
             border-left: 4px solid #ff4757;
         }
 
@@ -105,19 +106,19 @@
             font-size: 4rem;
             font-weight: bold;
             color: white;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 0 20px rgb(255, 255, 255);
             margin-bottom: 10px;
             animation: glow 2s ease-in-out infinite alternate;
         }
 
         @keyframes glow {
-            from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+            from { text-shadow: 0 0 20px rgb(255, 255, 255); }
             to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 71, 87, 0.5); }
         }
 
         .subtitle {
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgb(255, 255, 255);
         }
 
         /* Featured Carousel */
@@ -127,7 +128,7 @@
 
         .carousel-container {
             position: relative;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 4, 56, 0.3);
             border-radius: 15px;
             padding: 30px;
             backdrop-filter: blur(10px);
@@ -150,7 +151,7 @@
         }
 
         .movie-card {
-            background: linear-gradient(45deg, #2c2c2c, #404040);
+            background: linear-gradient(45deg, #6b0000, #404040);
             border-radius: 10px;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -165,7 +166,7 @@
         .movie-poster {
             width: 100%;
             height: 300px;
-            background: linear-gradient(45deg, #ff4757, #3742fa);
+            background: linear-gradient(45deg, #800510, #0008a0);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -447,30 +448,67 @@
         <!-- Sidebar Menu -->
         <aside class="sidebar" id="sidebar">
             <h2>MENÚ</h2>
-            <a href="#" class="menu-item active">
-                <span class="menu-icon">🏠</span>
-                <span>Inicio</span>
+            <a href="#" class="menu-item active" onclick="scrollToTop(); return false;">
+            <span class="menu-icon">🏠</span>
+            <span>Inicio</span>
             </a>
-            <a href="#" class="menu-item">
-                <span class="menu-icon">🎬</span>
-                <span>Películas</span>
-            </a>
-            <a href="#" class="menu-item">
-                <span class="menu-icon">📺</span>
-                <span>Series</span>
-            </a>
+            <script>
+            function scrollToTop() {
+            window.scrollTo({
+            top: 0,
+             behavior: 'smooth'
+             });
+            }
+            </script>
             <a href="#" class="menu-item">
                 <span class="menu-icon">🔥</span>
                 <span>Tendencias</span>
             </a>
             <a href="#" class="menu-item">
-                <span class="menu-icon">📋</span>
-                <span>Mi Lista</span>
-            </a>
-            <a href="#" class="menu-item">
                 <span class="menu-icon">🎭</span>
                 <span>Géneros</span>
             </a>
+            <a href="#animacion" class="menu-item" id="animacionBtn">
+            <span class="menu-icon">🎭</span>
+            <span>Animación</span>
+            </a>
+
+            <script>
+            document.getElementById('animacionBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('animacion').scrollIntoView({
+             behavior: 'smooth'
+             });
+            });
+            </script>
+
+            <a href="#cortometrajes" class="menu-item" id="cortometrajesBtn">
+            <span class="menu-icon">🎭</span>
+             <span>Spot</span>
+            </a>
+
+        <script>
+        document.getElementById('cortometrajesBtn').addEventListener('click', function(e) {
+         e.preventDefault();
+        document.getElementById('cortometrajes').scrollIntoView({
+        behavior: 'smooth'
+        });
+        });
+        </script>
+
+            <a href="#filminutos" class="menu-item" id="filminutosBtn">
+            <span class="menu-icon">🎭</span>
+             <span>Pitch</span>
+            </a>
+
+        <script>
+        document.getElementById('filminutosBtn').addEventListener('click', function(e) {
+         e.preventDefault();
+        document.getElementById('filminutos').scrollIntoView({
+        behavior: 'smooth'
+        });
+        });
+        </script>
             <a href="#" class="menu-item">
                 <span class="menu-icon">⚙️</span>
                 <span>Configuración</span>
@@ -485,121 +523,554 @@
         <main class="main-content" id="mainContent">
             <!-- Header -->
             <header class="header">
-                <h1 class="logo">SENCINE</h1>
+                <h1 class="logo">
+                    <img src="imagenes/logo.png" alt="">
+                </h1>
                 <p class="subtitle">Tu experiencia cinematográfica definitiva</p>
             </header>
 
-            <!-- Featured Carousel -->
-            <section class="featured-section">
-                <div class="carousel-container">
-                    <div class="carousel">
-                        <div class="carousel-track" id="carouselTrack">
-                            <div class="movie-slide">
-                                <div class="movie-card" onclick="window.open('https://youtu.be/zPTCp5wni38?si=31N5tJCpKj-PHpRr', '_blank')" >
-                                    <div class="movie-poster">PELÍCULA 1</div>
-                                    <div class="movie-info">
-                                        <div class="movie-title">El Gran Escape</div>
-                                        <div class="movie-genre">Acción • Drama</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="movie-slide">
-                                <div class="movie-card">
-                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/r-Zn_keL9HQ?si=YHpnDLMjZHqeUwhl&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                                </div>
-                            </div>
-                            <div class="movie-slide">
-                                <div class="movie-card">
-                                    <div class="movie-poster">PELÍCULA 3</div>
-                                    <div class="movie-info">
-                                        <div class="movie-title">Aventura Espacial</div>
-                                        <div class="movie-genre">Ciencia Ficción</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="movie-slide">
-                                <div class="movie-card">
-                                    <div class="movie-poster">PELÍCULA 4</div>
-                                    <div class="movie-info">
-                                        <div class="movie-title">La Última Misión</div>
-                                        <div class="movie-genre">Acción • Thriller</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="movie-slide">
-                                <div class="movie-card">
-                                    <div class="movie-poster">PELÍCULA 5</div>
-                                    <div class="movie-info">
-                                        <div class="movie-title">Misterio en la Ciudad</div>
-                                        <div class="movie-genre">Misterio • Suspense</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="movie-slide">
-                                <div class="movie-card">
-                                    <div class="movie-poster">PELÍCULA 6</div>
-                                    <div class="movie-info">
-                                        <div class="movie-title">Comedia Familiar</div>
-                                        <div class="movie-genre">Comedia • Familia</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-btn prev" onclick="moveCarousel(-1)">‹</button>
-                    <button class="carousel-btn next" onclick="moveCarousel(1)">›</button>
-                </div>
-            </section>
+           
 
             <!-- Lo Más Visto -->
-            <section class="content-section">
-                <h2 class="section-title">Lo Más Visto</h2>
-                <div class="content-grid">
-                    <div class="content-card">
-                        <div class="content-poster">TOP 1</div>
-                        <div class="content-info">
-                            <div class="content-title">El Fenómeno</div>
-                            <div class="content-description">La película más vista de la semana</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <div class="content-poster">TOP 2</div>
-                        <div class="content-info">
-                            <div class="content-title">Caminos Cruzados</div>
-                            <div class="content-description">Drama que conquista corazones</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <div class="content-poster">TOP 3</div>
-                        <div class="content-info">
-                            <div class="content-title">Risas Infinitas</div>
-                            <div class="content-description">Comedia para toda la familia</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <div class="content-poster">TOP 4</div>
-                        <div class="content-info">
-                            <div class="content-title">El Guardián</div>
-                            <div class="content-description">Acción que te mantiene al borde</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <div class="content-poster">TOP 5</div>
-                        <div class="content-info">
-                            <div class="content-title">Misterio Nocturno</div>
-                            <div class="content-description">Suspenso que no te deja dormir</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <div class="content-poster">TOP 6</div>
-                        <div class="content-info">
-                            <div class="content-title">Amor Eterno</div>
-                            <div class="content-description">Romance que emociona</div>
-                        </div>
+             <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrusel Lo Más Visto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff4757, #3742fa, #ff4757, #3742fa);
+            color: white;
+            padding: 20px;
+        }
+
+        .top-viewed-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .top-viewed-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .top-viewed-carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+        }
+
+        .top-viewed-carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .top-viewed-card {
+            flex: 0 0 280px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .top-viewed-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .top-viewed-poster {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .top-viewed-info {
+            padding: 20px;
+        }
+
+        .top-viewed-content-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .top-viewed-description {
+            font-size: 0.9rem;
+            color: #cccccc;
+            line-height: 1.4;
+        }
+
+        .top-viewed-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .top-viewed-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .top-viewed-prev {
+            left: 10px;
+        }
+
+        .top-viewed-next {
+            right: 10px;
+        }
+
+        .top-viewed-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .top-viewed-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .top-viewed-indicator.active {
+            background: #ff6b6b;
+            transform: scale(1.3);
+        }
+
+        @media (max-width: 768px) {
+            .top-viewed-card {
+                flex: 0 0 250px;
+            }
+            
+            .top-viewed-title {
+                font-size: 2rem;
+            }
+            
+            .top-viewed-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="top-viewed-section">
+        <h2 class="top-viewed-title">Lo Más Visto</h2>
+        <div class="top-viewed-carousel-container">
+            <div class="top-viewed-carousel" id="topViewedCarousel">
+                <div class="top-viewed-card">
+                    <iframe width="300" height="300" src="https://www.youtube.com/embed/LlbvzYX9oXA?si=rs_2bX-_YOvxD6MQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Animación</div>
+                        <div class="top-viewed-description">Juan Caldon</div>
                     </div>
                 </div>
-            </section>
+                <div class="top-viewed-card">
+                    <iframe width="300" height="300" src="https://www.youtube.com/embed/iR4aof2UJp4?si=L-Y59W7ftw3PuM_Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Spot</div>
+                        <div class="top-viewed-description">Pijao Spot Comercial</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                    <iframe width="300" height="300" src="https://www.youtube.com/embed/Y0bq7VCRJ8I?si=ESmsnUTL4Fir5eGq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Pitch</div>
+                        <div class="top-viewed-description">Pitch Selkie</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                    <iframe width="300" height="300" src="https://www.youtube.com/embed/S_b1IDmTg0A?si=jvyg98CeiNX93uB0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Teaser</div>
+                        <div class="top-viewed-description">Roloexpress Teaser</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                    <iframe width="300" height="300" src="https://www.youtube.com/embed/D-_bShJVVvg?si=COSL-T2M6MIpDFBk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Animación</div>
+                        <div class="top-viewed-description">Danna Moreno</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/y6vHLfdVtW0?si=WTx5RBo5i_dIszGZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Spot</div>
+                        <div class="top-viewed-description">Spot Zen</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/GZHOpjYfwoI?si=nqtViGBuN_4QYwFU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Filminuto</div>
+                        <div class="top-viewed-description">Zen</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="560" height="315" src="https://www.youtube.com/embed/qAJ8zn6oW1w?si=d2WbQQvDB0bq2yRo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Animación</div>
+                        <div class="top-viewed-description">Johan Fernández</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/wk9HQPQ-j5Y?si=7R83ntLTRl9MArNF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Documental</div>
+                        <div class="top-viewed-description">Policromías</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/-hnkenlyHp4?si=W4BoYSXB4WjnLvWe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Cortometraje</div>
+                        <div class="top-viewed-description">Bacatart</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/lP0ZFMZmIXY?si=p1FqBGZslH84m4zo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Pitch</div>
+                        <div class="top-viewed-description">Relife</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                  <iframe width="300" height="300" src="https://www.youtube.com/embed/HqnuVRSfekA?si=WzxINx0rq1aoZ8gX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Spot</div>
+                        <div class="top-viewed-description">Qualydemics</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/lc83hv5UJsg?si=bMQ8fKvj89B0ael_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Documental</div>
+                        <div class="top-viewed-description">Selkie</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                  <iframe width="300" height="300" src="https://www.youtube.com/embed/bU6Tr4hRQA8?si=yhNMUyfKYKSLy0Do" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Animación</div>
+                        <div class="top-viewed-description">Cuadro a Cuadro</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                  <iframe width="300" height="300" src="https://www.youtube.com/embed/h1dJ5lQaAsA?si=9Yy-lzteog7kRfIM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Pitch</div>
+                        <div class="top-viewed-description">Pijao Pitch</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/Z8LaV5Np9e0?si=Ol961KRnM1w5gvrX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Cortometraje</div>
+                        <div class="top-viewed-description">Relife</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/fUOc5kceIsU?si=hkCFGLs--7TfCGD1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Spot</div>
+                        <div class="top-viewed-description">Violin</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/4fRt70pFPko?si=933dgFjibCmLUFFf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Cortometraje</div>
+                        <div class="top-viewed-description">En el corazón de una estrella</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/5ai5cU_nYk0?si=g6plaV9Hpk3BLARO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Spot</div>
+                        <div class="top-viewed-description">Spot Final</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/npyU6nkXCxQ?si=pq0eknUFnzzD5669" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Animación</div>
+                        <div class="top-viewed-description">Alan Galindo</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/ICjiic2O_iM?si=RFXAmZoMr6M7z8R1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Cortometraje</div>
+                        <div class="top-viewed-description">La apuesta Selkie</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                  <iframe width="300" height="300" src="https://www.youtube.com/embed/t_lXB4xBeDI?si=8lF_WBxLn9td6GU1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Spot</div>
+                        <div class="top-viewed-description">Roloexpress</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/XqsQPSHBt3w?si=EK9Yfnf10i-zAsKt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Cortometraje</div>
+                        <div class="top-viewed-description">La banca Femdi</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/mkQrZV3BCJ4?si=x6oyIAC4oM7gvTN2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Animación</div>
+                        <div class="top-viewed-description">Alejandro Mendoza</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/Qtvpkovzzfs?si=LJroJlncZ0AQvHZg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Making of spot</div>
+                        <div class="top-viewed-description">Selkie</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/wzCJRaB-z_I?si=3b27kFDTo6O_qeMj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Spot</div>
+                        <div class="top-viewed-description">Selkie</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/GmDdmV7alwM?si=67Gvp1VuOf3dWWG4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Cortometraje</div>
+                        <div class="top-viewed-description">Mas que un deseo</div>
+                    </div>
+                </div>
+                <div class="top-viewed-card">
+                   <iframe width="300" height="300" src="https://www.youtube.com/embed/bKho6a1mu5Q?si=A4-KM76A0vAymuNT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="top-viewed-info">
+                        <div class="top-viewed-content-title">Animación</div>
+                        <div class="top-viewed-description">Camila Labrador</div>
+                    </div>
+                </div>
 
+
+            </div>
+            
+            <button class="top-viewed-nav-btn top-viewed-prev" id="topViewedPrev">‹</button>
+            <button class="top-viewed-nav-btn top-viewed-next" id="topViewedNext">›</button>
+        </div>
+        
+        <div class="top-viewed-indicators" id="topViewedIndicators"></div>
+    </section>
+
+    <script>
+        class TopViewedCarousel {
+            constructor() {
+                this.carousel = document.getElementById('topViewedCarousel');
+                this.prevBtn = document.getElementById('topViewedPrev');
+                this.nextBtn = document.getElementById('topViewedNext');
+                this.indicators = document.getElementById('topViewedIndicators');
+                
+                this.cards = this.carousel.children;
+                this.totalCards = this.cards.length;
+                this.currentIndex = 0;
+                this.cardWidth = 300; // 280px + 20px gap
+                this.visibleCards = this.getVisibleCards();
+                
+                this.init();
+            }
+            
+            getVisibleCards() {
+                const containerWidth = this.carousel.parentElement.offsetWidth;
+                return Math.floor(containerWidth / this.cardWidth);
+            }
+            
+            init() {
+                this.cloneCards();
+                this.createIndicators();
+                this.bindEvents();
+                this.updateCarousel();
+                
+                // Auto-play
+                this.startAutoPlay();
+                
+                // Responsive
+                window.addEventListener('resize', () => {
+                    this.visibleCards = this.getVisibleCards();
+                    this.updateCarousel();
+                });
+            }
+            
+            cloneCards() {
+                // Clone cards at the beginning and end for infinite scroll
+                for (let i = 0; i < this.visibleCards; i++) {
+                    const firstClone = this.cards[i].cloneNode(true);
+                    const lastClone = this.cards[this.totalCards - 1 - i].cloneNode(true);
+                    
+                    this.carousel.appendChild(firstClone);
+                    this.carousel.insertBefore(lastClone, this.cards[0]);
+                }
+                
+                this.currentIndex = this.visibleCards;
+                this.carousel.style.transform = `translateX(-${this.currentIndex * this.cardWidth}px)`;
+            }
+            
+            createIndicators() {
+                for (let i = 0; i < this.totalCards; i++) {
+                    const indicator = document.createElement('div');
+                    indicator.className = 'top-viewed-indicator';
+                    if (i === 0) indicator.classList.add('active');
+                    
+                    indicator.addEventListener('click', () => {
+                        this.goToSlide(i);
+                    });
+                    
+                    this.indicators.appendChild(indicator);
+                }
+            }
+            
+            bindEvents() {
+                this.prevBtn.addEventListener('click', () => {
+                    this.prevSlide();
+                });
+                
+                this.nextBtn.addEventListener('click', () => {
+                    this.nextSlide();
+                });
+                
+                // Pause auto-play on hover
+                this.carousel.parentElement.addEventListener('mouseenter', () => {
+                    this.stopAutoPlay();
+                });
+                
+                this.carousel.parentElement.addEventListener('mouseleave', () => {
+                    this.startAutoPlay();
+                });
+            }
+            
+            updateCarousel() {
+                this.carousel.style.transform = `translateX(-${this.currentIndex * this.cardWidth}px)`;
+                this.updateIndicators();
+            }
+            
+            updateIndicators() {
+                const realIndex = this.getRealIndex();
+                const indicators = this.indicators.children;
+                
+                for (let i = 0; i < indicators.length; i++) {
+                    indicators[i].classList.toggle('active', i === realIndex);
+                }
+            }
+            
+            getRealIndex() {
+                let realIndex = (this.currentIndex - this.visibleCards) % this.totalCards;
+                if (realIndex < 0) realIndex += this.totalCards;
+                return realIndex;
+            }
+            
+            nextSlide() {
+                this.currentIndex++;
+                this.carousel.style.transition = 'transform 0.5s ease';
+                this.updateCarousel();
+                
+                // Check for infinite scroll
+                if (this.currentIndex >= this.totalCards + this.visibleCards) {
+                    setTimeout(() => {
+                        this.carousel.style.transition = 'none';
+                        this.currentIndex = this.visibleCards;
+                        this.updateCarousel();
+                    }, 500);
+                }
+            }
+            
+            prevSlide() {
+                this.currentIndex--;
+                this.carousel.style.transition = 'transform 0.5s ease';
+                this.updateCarousel();
+                
+                // Check for infinite scroll
+                if (this.currentIndex < 0) {
+                    setTimeout(() => {
+                        this.carousel.style.transition = 'none';
+                        this.currentIndex = this.totalCards - 1 + this.visibleCards;
+                        this.updateCarousel();
+                    }, 500);
+                }
+            }
+            
+            goToSlide(index) {
+                this.currentIndex = index + this.visibleCards;
+                this.carousel.style.transition = 'transform 0.5s ease';
+                this.updateCarousel();
+            }
+            
+            startAutoPlay() {
+                this.autoPlayInterval = setInterval(() => {
+                    this.nextSlide();
+                }, 4000);
+            }
+            
+            stopAutoPlay() {
+                if (this.autoPlayInterval) {
+                    clearInterval(this.autoPlayInterval);
+                }
+            }
+        }
+        
+        // Initialize carousel when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new TopViewedCarousel();
+        });
+    </script>
+</body>
+</html>
             <!-- Categories Section -->
             <section class="categories-section">
                 <h2 class="section-title">Categorías</h2>
@@ -608,19 +1079,19 @@
                         <span class="category-icon">🎨</span>
                         <h3 class="category-title">Animación</h3>
                         <p class="category-description">Aventuras animadas para toda la familia</p>
-                        <div class="category-count">24</div>
+                        <div class="category-count">6</div>
                     </div>
                     <div class="category-card" onclick="showCategory('cortometrajes')">
                         <span class="category-icon">🎬</span>
-                        <h3 class="category-title">Cortometrajes</h3>
+                        <h3 class="category-title">Spot</h3>
                         <p class="category-description">Historias intensas en formato corto</p>
-                        <div class="category-count">18</div>
+                        <div class="category-count">6</div>
                     </div>
                     <div class="category-card" onclick="showCategory('filminutos')">
                         <span class="category-icon">⚡</span>
-                        <h3 class="category-title">Filminutos</h3>
+                        <h3 class="category-title">Pitch</h3>
                         <p class="category-description">Emociones concentradas en minutos</p>
-                        <div class="category-count">32</div>
+                        <div class="category-count">6</div>
                     </div>
                 </div>
             </section>
@@ -630,146 +1101,147 @@
                 <h2 class="section-title">Animación</h2>
                 <div class="content-grid">
                     <div class="content-card">
-                        <div class="content-poster">ANIM 1</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/2oruBcRYKW0?si=HWuDK48IJ9WVoG7m" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Mundo Mágico</div>
-                            <div class="content-description">Aventura animada llena de magia</div>
+                            <div class="content-title">Animación</div>
+                            <div class="content-description">Sara Ordoñez</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">ANIM 2</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/vsS_kp5luAE?si=Kfi1TJi5rZhWufng" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Los Pequeños Héroes</div>
-                            <div class="content-description">Historia de amistad y valor</div>
+                            <div class="content-title">Animación</div>
+                            <div class="content-description">Diana Bonilla</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">ANIM 3</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/SpV7a5Lp6UM?si=M_j_MjG1-nFzrwXC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Océano Azul</div>
-                            <div class="content-description">Aventura submarina fascinante</div>
+                            <div class="content-title">Animación</div>
+                            <div class="content-description">Juan Ardila</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">ANIM 4</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/Mv9Wnpr8K9U?si=Nzd0Aj88WIL_Uc1Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Viaje a las Estrellas</div>
-                            <div class="content-description">Exploración espacial animada</div>
+                            <div class="content-title">Animación</div>
+                            <div class="content-description">Mateo Gomez</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">ANIM 5</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/l2Fmj7HuImg?si=3CxTMu_bc1LZA3sV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Reino Fantástico</div>
-                            <div class="content-description">Princesas y dragones modernos</div>
+                            <div class="content-title">Animación</div>
+                            <div class="content-description">Juan Rodriguez</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">ANIM 6</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/-uJ35NMKLIw?si=AvXh4YJeUX9MkBZx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Robot Amigo</div>
-                            <div class="content-description">Amistad entre humanos y robots</div>
+                            <div class="content-title">Animación</div>
+                            <div class="content-description">Paula Buitrago</div>
                         </div>
                     </div>
-                </div>
+                    
+                    </div>
             </section>
 
             <!-- Cortometrajes Content -->
             <section class="content-section category-content" id="cortometrajes">
-                <h2 class="section-title">Cortometrajes</h2>
+                <h2 class="section-title">Spots</h2>
                 <div class="content-grid">
                     <div class="content-card">
-                        <div class="content-poster">CORTO 1</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/aJGjuPMk7c8?si=21ZLH2Xp-y8B688r" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Momentos</div>
-                            <div class="content-description">Drama intenso en 15 minutos</div>
+                            <div class="content-title">Spot</div>
+                            <div class="content-description">Spot publitero</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">CORTO 2</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/GSaOHJdMNBo?si=HCJD4bhO0KoFMyBh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">La Decisión</div>
-                            <div class="content-description">Thriller psicológico breve</div>
+                            <div class="content-title">Spot</div>
+                            <div class="content-description">Spot Policromías</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">CORTO 3</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/AHfsm6dWg7k?si=TYOeU-FRjOmNVQ9u" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Recuerdos</div>
-                            <div class="content-description">Historia emotiva y nostálgica</div>
+                            <div class="content-title">Spot</div>
+                            <div class="content-description">Spot Metanoia</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">CORTO 4</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/TexR9DbJnAs?si=no1Cz3GFztZ9Ynss" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">El Encuentro</div>
-                            <div class="content-description">Romance en formato corto</div>
+                            <div class="content-title">Spot</div>
+                            <div class="content-description">Spot Disroler</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">CORTO 5</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/tHzeoc_Dia0?si=bTD4NTvyrWyoYYyM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Despertar</div>
-                            <div class="content-description">Ciencia ficción contemplativa</div>
+                            <div class="content-title">Spot</div>
+                            <div class="content-description"> Spot La cobija roja</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">CORTO 6</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/RUrwVg751XE?si=SWnqKp5kSXSPzB86" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Silencio</div>
-                            <div class="content-description">Drama sin diálogos</div>
+                            <div class="content-title">Spot</div>
+                            <div class="content-description">Spot Cenibox</div>
                         </div>
                     </div>
-                </div>
+                    </div>
             </section>
 
             <!-- Filminutos Content -->
             <section class="content-section category-content" id="filminutos">
-                <h2 class="section-title">Filminutos</h2>
+                <h2 class="section-title">Pitchs</h2>
                 <div class="content-grid">
                     <div class="content-card">
-                        <div class="content-poster">MIN 1</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/QuvvyefL9As?si=kqO43wwuOASKpMGP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Flash</div>
-                            <div class="content-description">Historia completa en 1 minuto</div>
+                            <div class="content-title">Pitch</div>
+                            <div class="content-description"> Pitch Audiovisual Munrage</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">MIN 2</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/kmxr1gsp7cY?si=xZEKNI7A3nIakDSD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Velocidad</div>
-                            <div class="content-description">Acción concentrada</div>
+                            <div class="content-title">Pitch</div>
+                            <div class="content-description">Pitch Femdi</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">MIN 3</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/bIga5JntNgI?si=bdevDDScmswX5qt6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Instante</div>
-                            <div class="content-description">Emociones en segundos</div>
+                            <div class="content-title">Pitch</div>
+                            <div class="content-description">Pitch Metanoia</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">MIN 4</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/tCR8noiPhj8?si=7Y0R91bNXZI0BXUl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Chispa</div>
-                            <div class="content-description">Comedia ultra rápida</div>
+                            <div class="content-title">Pitch</div>
+                            <div class="content-description">Pitch Bacatart</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">MIN 5</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/NNNvAnC_G80?si=30TMAChoQVgi7oEB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Rayo</div>
-                            <div class="content-description">Suspenso en 30 segundos</div>
+                            <div class="content-title">Pitch</div>
+                            <div class="content-description">Pitch Zen</div>
                         </div>
                     </div>
                     <div class="content-card">
-                        <div class="content-poster">MIN 6</div>
+                        <iframe width="250" height="315" src="https://www.youtube.com/embed/n_zB-uBtZrk?si=xknjRVky9H1ttZov" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="content-info">
-                            <div class="content-title">Micro</div>
-                            <div class="content-description">Drama microscópico</div>
+                            <div class="content-title">Pitch</div>
+                            <div class="content-description">Pa´chicos pitch</div>
                         </div>
                     </div>
-                </div>
+                    </div>
             </section>
         </main>
     </div>
