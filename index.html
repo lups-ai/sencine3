@@ -13,11 +13,8 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(45deg, #c1eb07, #02086b, #7ebbf5, #ff00c8);
-            background-size: 400% 400%;
-            animation: gradientMove 8s ease infinite;
             min-height: 100vh;
-            color: white;
+            background-color: #4ba259;
         }
 
         @keyframes gradientMove {
@@ -250,7 +247,7 @@
         }
 
         .category-card.active {
-            border: 2px solid #ff4757;
+            border: 2px solid #ffffff;
             background: rgba(255, 71, 87, 0.2);
         }
 
@@ -276,7 +273,7 @@
         .category-count {
             font-size: 2rem;
             font-weight: bold;
-            color: #ff4757;
+            color: #ffffff;
         }
 
         /* Content Sections */
@@ -321,7 +318,7 @@
         .content-poster {
             width: 100%;
             height: 250px;
-            background: linear-gradient(45deg, #3742fa, #ff4757);
+            background: linear-gradient(45deg, #3742fa, #470107);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -444,12 +441,12 @@
 <body>
     <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
     
-    <div class="container">
+    <div class="container ">
         <!-- Sidebar Menu -->
         <aside class="sidebar" id="sidebar">
             <h2>MENÚ</h2>
             <a href="#" class="menu-item active" onclick="scrollToTop(); return false;">
-            <span class="menu-icon">🏠</span>
+            <span class="menu-icon">🏦</span>
             <span>Inicio</span>
             </a>
             <script>
@@ -460,16 +457,8 @@
              });
             }
             </script>
-            <a href="#" class="menu-item">
-                <span class="menu-icon">🔥</span>
-                <span>Tendencias</span>
-            </a>
-            <a href="#" class="menu-item">
-                <span class="menu-icon">🎭</span>
-                <span>Géneros</span>
-            </a>
             <a href="#animacion" class="menu-item" id="animacionBtn">
-            <span class="menu-icon">🎭</span>
+            <span class="menu-icon">⛄</span>
             <span>Animación</span>
             </a>
 
@@ -483,7 +472,7 @@
             </script>
 
             <a href="#cortometrajes" class="menu-item" id="cortometrajesBtn">
-            <span class="menu-icon">🎭</span>
+            <span class="menu-icon">✉️</span>
              <span>Spot</span>
             </a>
 
@@ -497,7 +486,7 @@
         </script>
 
             <a href="#filminutos" class="menu-item" id="filminutosBtn">
-            <span class="menu-icon">🎭</span>
+            <span class="menu-icon">🧾</span>
              <span>Pitch</span>
             </a>
 
@@ -514,7 +503,7 @@
                 <span>Configuración</span>
             </a>
             <a href="#" class="menu-item">
-                <span class="menu-icon">👤</span>
+                <span class="menu-icon">🤺</span>
                 <span>Perfil</span>
             </a>
         </aside>
@@ -595,7 +584,7 @@
         .top-viewed-card:hover {
             transform: translateY(-10px) scale(1.05);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.3);
+            border-color: rgb(255, 255, 255);
         }
 
         .top-viewed-poster {
@@ -671,7 +660,7 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgb(255, 253, 253);
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -1244,7 +1233,145 @@
                     </div>
             </section>
         </main>
+
+        
+
     </div>
+
+        <style>
+.footer {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #0d0057, #920000, #00115c);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.allied-text {
+    font-size: 1.1rem;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    border: 2px solid rgba(11, 0, 114, 0.658);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.6s ease-out 0.2s both;
+}
+
+.allied-text:hover {
+    background-color: rgba(247, 147, 30, 0.2);
+    border-color: #00065f;
+    transform: translateY(-2px);
+}
+
+.copyright-text {
+    font-size: 0.95rem;
+    color: #cccccc;
+    text-align: center;
+    line-height: 1.5;
+    max-width: 600px;
+    animation: fadeIn 0.6s ease-out 0.4s both;
+}
+
+.year {
+    color: #000874;
+    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 25px 15px;
+    }
+    
+    .footer-content {
+        gap: 15px;
+    }
+    
+    .footer-logo {
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+    }
+    
+    .allied-text {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+    
+    .copyright-text {
+        font-size: 0.85rem;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 20px 10px;
+    }
+    
+    .footer-logo {
+        font-size: 1.2rem;
+    }
+    
+    .allied-text {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+    
+    .copyright-text {
+        font-size: 0.8rem;
+    }
+}
+</style>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-logo">SENA</div>
+        
+        <div class="allied-text">
+            Aliados con Talentic
+        </div>
+        
+        <div class="copyright-text">
+            © <span class="year">2025</span> - Todo contenido del SENA es del SENA y para el SENA
+        </div>
+    </div>
+</footer>
 
     <script>
         // Carousel functionality
@@ -1380,5 +1507,13 @@
         // Call on load
         window.addEventListener('load', initResponsiveCarousel);
     </script>
+
+        
+        
+
+
+            
+   
+
 </body>
 </html>
