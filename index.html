@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SENCINE - Tu Plataforma de Streaming</title>
+    
     <style>
         * {
             margin: 0;
@@ -14,349 +15,311 @@
         body {
             font-family: 'Arial', sans-serif;
             min-height: 100vh;
-            background-color: #4ba259;
-        }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sidebar Menu */
-        .sidebar {
-            width: 250px;
-            background: rgb(255, 255, 255);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            position: fixed;
+            margin: 0;
+            padding: 0;
             height: 100vh;
-            left: 0;
-            top: 0;
-            z-index: 1000;
-            transition: transform 0.3s ease;
+            background: linear-gradient(45deg, #ff0000, #0000ff, #ff0000, #0000ff);
+            background-size: 400% 400%;
+            animation: gradientMove 4s ease infinite;
         }
 
-        .sidebar.hidden {
-            transform: translateX(-100%);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .sidebar h2 {
-            margin-bottom: 30px;
-            text-align: center;
-            color: #7e0901;
-            font-size: 1.5rem;
-        }
-
-        .menu-item {
-            display: flex;
-            align-items: center;
-            padding: 15px 10px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: rgb(133, 39, 39);
-        }
-
-        .menu-item:hover {
-            background: linear-gradient(45deg, #8B0000, #1a1a2e, #16213e, #0f3460, #8B0000);
-            transform: translateX(10px);
-            color: white;
-        }
-
-        .menu-item.active {
-            background: rgb(5, 10, 90);
-            border-left: 4px solid #ff4757;
-        }
-
-        .menu-icon {
-            margin-right: 15px;
-            font-size: 1.2rem;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            margin-left: 250px;
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             padding: 20px;
-            transition: margin-left 0.3s ease;
         }
 
-        .main-content.expanded {
-            margin-left: 0;
-        }
-
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .logo {
-            font-size: 4rem;
-            font-weight: bold;
-            color: white;
-            text-shadow: 0 0 20px rgb(255, 255, 255);
-            margin-bottom: 10px;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 20px rgb(255, 255, 255); }
-            to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 71, 87, 0.5); }
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: rgb(255, 255, 255);
-        }
-
-        /* Featured Carousel */
-        .featured-section {
-            margin-bottom: 50px;
-        }
-
-        .carousel-container {
-            position: relative;
-            background: rgba(0, 4, 56, 0.3);
-            border-radius: 15px;
-            padding: 30px;
-            backdrop-filter: blur(10px);
-        }
-
-        .carousel {
-            display: flex;
-            overflow: hidden;
-            border-radius: 10px;
-        }
-
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .movie-slide {
-            min-width: 33.333%;
-            padding: 0 10px;
-        }
-
-        .movie-card {
-            background: linear-gradient(45deg, #6b0000, #404040);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-
-        .movie-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .movie-poster {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(45deg, #800510, #0008a0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-        }
-
-        .movie-info {
-            padding: 15px;
-        }
-
-        .movie-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .movie-genre {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Carousel Controls */
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 71, 87, 0.8);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-
-        .carousel-btn:hover {
-            background: rgba(255, 71, 87, 1);
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .carousel-btn.prev {
-            left: 20px;
-        }
-
-        .carousel-btn.next {
-            right: 20px;
-        }
-
-        /* Categories Section */
-        .categories-section {
-            margin-bottom: 50px;
-        }
-
-        .categories-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .category-card {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 2px solid transparent;
-        }
-
-        .category-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 71, 87, 0.5);
-        }
-
-        .category-card.active {
-            border: 2px solid #ffffff;
-            background: rgba(255, 71, 87, 0.2);
-        }
-
-        .category-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .category-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: white;
-        }
-
-        .category-description {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 20px;
-        }
-
-        .category-count {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #ffffff;
-        }
-
-        /* Content Sections */
         .content-section {
-            margin-bottom: 40px;
-        }
-
-        .content-section.category-content {
-            display: none;
-        }
-
-        .content-section.category-content.active {
-            display: block;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
         .section-title {
-            font-size: 2rem;
-            margin-bottom: 20px;
+            font-size: clamp(2rem, 4vw, 3.5rem);
             color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
         }
 
         .content-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
         }
 
         .content-card {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 10px;
-            overflow: hidden;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
         }
 
         .content-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
 
-        .content-poster {
+        .video-container {
+            position: relative;
             width: 100%;
-            height: 250px;
-            background: linear-gradient(45deg, #3742fa, #470107);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: white;
+            height: 0;
+            padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+            overflow: hidden;
+            border-radius: 15px;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 15px;
         }
 
         .content-info {
-            padding: 15px;
+            padding: 20px 0 0 0;
+            text-align: center;
         }
 
         .content-title {
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
         }
 
         .content-description {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            color: #7f8c8d;
+            font-weight: 500;
+            position: relative;
+            padding: 8px 16px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            border-radius: 25px;
+            display: inline-block;
         }
 
-        /* Mobile Menu Toggle */
+        /* Responsive breakpoints */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 30px 15px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 15px 0;
+            }
+
+            .content-card {
+                padding: 15px;
+                border-radius: 15px;
+            }
+
+            .video-container {
+                border-radius: 12px;
+            }
+
+            .content-title {
+                font-size: 1.2rem;
+            }
+
+            .content-description {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .content-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .content-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Animaciones */
+        .content-card {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .content-card:nth-child(1) { animation-delay: 0.1s; }
+        .content-card:nth-child(2) { animation-delay: 0.2s; }
+        .content-card:nth-child(3) { animation-delay: 0.3s; }
+        .content-card:nth-child(4) { animation-delay: 0.4s; }
+        .content-card:nth-child(5) { animation-delay: 0.5s; }
+        .content-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hover effects para desktop */
+        @media (hover: hover) {
+            .content-card:hover .content-title {
+                color: #667eea;
+            }
+
+            .content-card:hover .video-container {
+                transform: scale(1.02);
+            }
+
+            .video-container {
+                transition: transform 0.3s ease;
+            }
+        }
+    </style>
+    
+        
+       
+    </style>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Superior Responsive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Contenedor principal del menú */
+        .top-menu-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+           background-color: #00065f;
+            box-shadow: 0 2px 10px rgb(255, 255, 255);
+            z-index: 1000;
+            padding: 0 20px;
+        }
+
+        /* Botón hamburguesa para móviles */
         .menu-toggle {
             display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1001;
-            background: rgba(255, 71, 87, 0.9);
-            color: white;
+            background: none;
             border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
+            font-size: 24px;
+            color: white;
             cursor: pointer;
+            padding: 15px;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Título del menú */
+        .menu-title {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px 0;
+            display: block;
+        }
+
+        /* Contenedor de los items del menú */
+        .menu-items {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            padding: 0;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50px;
+            margin: 0 auto 15px;
+            max-width: 800px;
+        }
+
+        /* Items individuales del menú */
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-radius: 25px;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .menu-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .menu-item.active {
+            background: rgba(255,255,255,0.3);
+            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+        }
+
+        .menu-icon {
+            font-size: 18px;
         }
 
         /* Responsive Design */
@@ -365,162 +328,478 @@
                 display: block;
             }
 
-            .sidebar {
-                transform: translateX(-100%);
+            .menu-title {
+                padding-right: 60px;
             }
 
-            .sidebar.visible {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 80px 15px 20px 15px;
-            }
-
-            .logo {
-                font-size: 2.5rem;
-            }
-
-            .movie-slide {
-                min-width: 100%;
-            }
-
-            .categories-container {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .content-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 15px;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .carousel-container {
+            .menu-items {
+                position: absolute;
+                top: 100%;
+                left: 20px;
+                right: 20px;
+                background: rgba(0, 0, 0, 0.274);
+                backdrop-filter: blur(10px);
+                border-radius: 15px;
+                flex-direction: column;
+                gap: 5px;
                 padding: 20px;
+                transform: translateY(-20px);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                box-shadow: 0 10px 30px rgb(255, 255, 255);
             }
 
-            .category-icon {
-                font-size: 3rem;
+            .menu-items.show {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
             }
 
-            .category-title {
-                font-size: 1.2rem;
+            .menu-item {
+                width: 100%;
+                justify-content: flex-start;
+                padding: 15px 20px;
+                border-radius: 10px;
             }
         }
 
         @media (max-width: 480px) {
+            .top-menu-container {
+                padding: 0 15px;
+            }
+
+            .menu-title {
+                font-size: 18px;
+                padding-right: 50px;
+            }
+
+            .menu-item span:last-child {
+                font-size: 14px;
+            }
+        }
+
+        /* Animaciones adicionales */
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .menu-item:hover::before {
+            width: 80%;
+        }
+
+        .menu-item.active::before {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Menú Superior -->
+    <div class="top-menu-container">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        
+        <h2 class="menu-title">MENÚ</h2>
+        
+        <div class="menu-items" id="menuItems">
+            <a href="#" class="menu-item active" onclick="scrollToTop(); return false;">
+                <span class="menu-icon">🏦</span>
+                <span>Inicio</span>
+            </a>
+            
+            <a href="#animacion" class="menu-item" id="animacionBtn">
+                <span class="menu-icon">⛄</span>
+                <span>Animación</span>
+            </a>
+
+            <a href="#cortometrajes" class="menu-item" id="cortometrajesBtn">
+                <span class="menu-icon">✉️</span>
+                <span>Spot</span>
+            </a>
+
+            <a href="#filminutos" class="menu-item" id="filminutosBtn">
+                <span class="menu-icon">🧾</span>
+                <span>Pitch</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Función para hacer scroll al inicio
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Función para toggle del menú móvil
+        function toggleMenu() {
+            const menuItems = document.getElementById('menuItems');
+            menuItems.classList.toggle('show');
+        }
+
+        // Event listeners para navegación suave
+        document.getElementById('animacionBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const element = document.getElementById('animacion');
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+            // Cerrar menú móvil si está abierto
+            document.getElementById('menuItems').classList.remove('show');
+        });
+
+        document.getElementById('cortometrajesBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const element = document.getElementById('cortometrajes');
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+            // Cerrar menú móvil si está abierto
+            document.getElementById('menuItems').classList.remove('show');
+        });
+
+        document.getElementById('filminutosBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const element = document.getElementById('filminutos');
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+            // Cerrar menú móvil si está abierto
+            document.getElementById('menuItems').classList.remove('show');
+        });
+
+        // Cerrar menú al hacer clic fuera de él
+        document.addEventListener('click', function(event) {
+            const menuContainer = document.querySelector('.top-menu-container');
+            const menuItems = document.getElementById('menuItems');
+            
+            if (!menuContainer.contains(event.target)) {
+                menuItems.classList.remove('show');
+            }
+        });
+
+        // Función para resaltar el item activo según la sección visible
+        function updateActiveMenuItem() {
+            const sections = ['animacion', 'cortometrajes', 'filminutos'];
+            const menuItems = document.querySelectorAll('.menu-item');
+            
+            let currentSection = '';
+            
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= 100 && rect.bottom >= 100) {
+                        currentSection = sectionId;
+                    }
+                }
+            });
+            
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+                if (currentSection && item.getAttribute('href') === `#${currentSection}`) {
+                    item.classList.add('active');
+                } else if (!currentSection && item.getAttribute('href') === '#') {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Actualizar item activo al hacer scroll
+        window.addEventListener('scroll', updateActiveMenuItem);
+    </script>
+</body>
+</html>
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Responsive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #050c4d 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            margin-bottom: 0.5rem;
+        }
+
+        .logo img {
+            max-width: 100%;
+            height: auto;
+            max-height: 80px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .subtitle {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        /* Tablets */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem 1.5rem;
+            }
+            
+            .logo img {
+                max-height: 60px;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        /* Móviles */
+        @media (max-width: 480px) {
+            .header {
+                padding: 0.8rem 1rem;
+            }
+            
             .logo {
-                font-size: 2rem;
+                margin-bottom: 0.3rem;
             }
-
-            .content-grid {
-                grid-template-columns: repeat(2, 1fr);
+            
+            .logo img {
+                max-height: 50px;
             }
-
-            .carousel-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
+            
+            .subtitle {
+                font-size: 0.9rem;
+                line-height: 1.3;
+                padding: 0 0.5rem;
             }
+        }
 
-            .categories-container {
-                gap: 15px;
+        /* Móviles muy pequeños */
+        @media (max-width: 320px) {
+            .header {
+                padding: 0.5rem;
             }
+            
+            .logo img {
+                max-height: 40px;
+            }
+            
+            .subtitle {
+                font-size: 0.8rem;
+            }
+        }
 
-            .category-card {
-                padding: 20px;
+        /* Pantallas grandes */
+        @media (min-width: 1200px) {
+            .header {
+                padding: 2rem 3rem;
+            }
+            
+            .logo img {
+                max-height: 100px;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
             }
         }
     </style>
 </head>
 <body>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <header class="header">
+        <h1 class="logo">
+            <img src=>
+        </h1>
+        
+    </header>
     
-    <div class="container ">
-        <!-- Sidebar Menu -->
-        <aside class="sidebar" id="sidebar">
-            <h2>MENÚ</h2>
-            <a href="#" class="menu-item active" onclick="scrollToTop(); return false;">
-            <span class="menu-icon">🏦</span>
-            <span>Inicio</span>
-            </a>
-            <script>
-            function scrollToTop() {
-            window.scrollTo({
-            top: 0,
-             behavior: 'smooth'
-             });
-            }
-            </script>
-            <a href="#animacion" class="menu-item" id="animacionBtn">
-            <span class="menu-icon">⛄</span>
-            <span>Animación</span>
-            </a>
-
-            <script>
-            document.getElementById('animacionBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('animacion').scrollIntoView({
-             behavior: 'smooth'
-             });
-            });
-            </script>
-
-            <a href="#cortometrajes" class="menu-item" id="cortometrajesBtn">
-            <span class="menu-icon">✉️</span>
-             <span>Spot</span>
-            </a>
-
-        <script>
-        document.getElementById('cortometrajesBtn').addEventListener('click', function(e) {
-         e.preventDefault();
-        document.getElementById('cortometrajes').scrollIntoView({
-        behavior: 'smooth'
-        });
-        });
-        </script>
-
-            <a href="#filminutos" class="menu-item" id="filminutosBtn">
-            <span class="menu-icon">🧾</span>
-             <span>Pitch</span>
-            </a>
-
-        <script>
-        document.getElementById('filminutosBtn').addEventListener('click', function(e) {
-         e.preventDefault();
-        document.getElementById('filminutos').scrollIntoView({
-        behavior: 'smooth'
-        });
-        });
-        </script>
-            <a href="#" class="menu-item">
-                <span class="menu-icon">⚙️</span>
-                <span>Configuración</span>
-            </a>
-            <a href="#" class="menu-item">
-                <span class="menu-icon">🤺</span>
-                <span>Perfil</span>
-            </a>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content" id="mainContent">
-            <!-- Header -->
-            <header class="header">
-                <h1 class="logo">
-                    <img src="imagenes/logo.png" alt="">
-                </h1>
-                <p class="subtitle">Tu experiencia cinematográfica definitiva</p>
-            </header>
+    <!-- Contenido adicional para ver el comportamiento -->
+    <div style="padding: 2rem; color: white; text-align: center;">
+        
+        
+    </div>
+</body>
+</html>
+        
 
            
 
             <!-- Lo Más Visto -->
+
+            <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Responsive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            margin-bottom: 0.5rem;
+        }
+
+        .logo img {
+            max-width: 100%;
+            height: auto;
+            max-height: 80px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .subtitle {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        /* Tablets */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem 1.5rem;
+            }
+            
+            .logo img {
+                max-height: 60px;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        /* Móviles */
+        @media (max-width: 480px) {
+            .header {
+                padding: 0.8rem 1rem;
+            }
+            
+            .logo {
+                margin-bottom: 0.3rem;
+            }
+            
+            .logo img {
+                max-height: 50px;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+                line-height: 1.3;
+                padding: 0 0.5rem;
+            }
+        }
+
+        /* Móviles muy pequeños */
+        @media (max-width: 320px) {
+            .header {
+                padding: 0.5rem;
+            }
+            
+            .logo img {
+                max-height: 40px;
+            }
+            
+            .subtitle {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Pantallas grandes */
+        @media (min-width: 1200px) {
+            .header {
+                padding: 2rem 3rem;
+            }
+            
+            .logo img {
+                max-height: 100px;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="logo">
+            <img src="imagenes/logo.png" alt="Logo">
+        </h1>
+        
+    </header>
+    
+    
+</body>
+</html>
              <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrusel Lo Más Visto</title>
@@ -533,7 +812,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(45deg, #ff4757, #3742fa, #ff4757, #3742fa);
+            background: white
             color: white;
             padding: 20px;
         }
@@ -549,7 +828,7 @@
             font-weight: bold;
             margin-bottom: 30px;
             text-align: center;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            background: linear-gradient(45deg, #ffffff, #f6f8fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -584,19 +863,19 @@
         .top-viewed-card:hover {
             transform: translateY(-10px) scale(1.05);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: rgb(255, 255, 255);
+            border-color: rgb(44, 1, 1);
         }
 
         .top-viewed-poster {
             height: 200px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #350301, #030020);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
             font-weight: bold;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: rgb(0, 0, 0);
+            text-shadow: 2px 2px 4px rgba(240, 234, 234, 0.5);
         }
 
         .top-viewed-info {
@@ -666,32 +945,27 @@
         }
 
         .top-viewed-indicator.active {
-            background: #ff6b6b;
+            background: #06003a;
             transform: scale(1.3);
         }
 
-        @media (max-width: 768px) {
-            .top-viewed-card {
-                flex: 0 0 250px;
-            }
-            
-            .top-viewed-title {
-                font-size: 2rem;
-            }
-            
-            .top-viewed-nav-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
+        @media (min-width:600px) {
+            .header{
+                flex-direction: row;
+                padding: 0px 30px;
+                justify-content: space-between;
             }
         }
+            
     </style>
 </head>
 <body>
     <section class="top-viewed-section">
         <h2 class="top-viewed-title">Lo Más Visto</h2>
         <div class="top-viewed-carousel-container">
-            <div class="top-viewed-carousel" id="topViewedCarousel">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-xxl-2" ></div>
+            <div class= "top-viewed-carousel" id="topViewedCarousel" >
                 <div class="top-viewed-card">
                     <iframe width="300" height="300" src="https://www.youtube.com/embed/LlbvzYX9oXA?si=rs_2bX-_YOvxD6MQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     <div class="top-viewed-info">
@@ -888,7 +1162,7 @@
                         <div class="top-viewed-description">Camila Labrador</div>
                     </div>
                 </div>
-
+            </div>
 
             </div>
             
@@ -1060,178 +1334,685 @@
     </script>
 </body>
 </html>
-            <!-- Categories Section -->
-            <section class="categories-section">
-                <h2 class="section-title">Categorías</h2>
-                <div class="categories-container">
-                    <div class="category-card active" onclick="showCategory('animacion')">
-                        <span class="category-icon">🎨</span>
-                        <h3 class="category-title">Animación</h3>
-                        <p class="category-description">Aventuras animadas para toda la familia</p>
-                        <div class="category-count">6</div>
-                    </div>
-                    <div class="category-card" onclick="showCategory('cortometrajes')">
-                        <span class="category-icon">🎬</span>
-                        <h3 class="category-title">Spot</h3>
-                        <p class="category-description">Historias intensas en formato corto</p>
-                        <div class="category-count">6</div>
-                    </div>
-                    <div class="category-card" onclick="showCategory('filminutos')">
-                        <span class="category-icon">⚡</span>
-                        <h3 class="category-title">Pitch</h3>
-                        <p class="category-description">Emociones concentradas en minutos</p>
-                        <div class="category-count">6</div>
-                    </div>
-                </div>
-            </section>
+            
 
             <!-- Animación Content -->
-            <section class="content-section category-content active" id="animacion">
-                <h2 class="section-title">Animación</h2>
-                <div class="content-grid">
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/2oruBcRYKW0?si=HWuDK48IJ9WVoG7m" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Animación</div>
-                            <div class="content-description">Sara Ordoñez</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/vsS_kp5luAE?si=Kfi1TJi5rZhWufng" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Animación</div>
-                            <div class="content-description">Diana Bonilla</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/SpV7a5Lp6UM?si=M_j_MjG1-nFzrwXC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Animación</div>
-                            <div class="content-description">Juan Ardila</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/Mv9Wnpr8K9U?si=Nzd0Aj88WIL_Uc1Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Animación</div>
-                            <div class="content-description">Mateo Gomez</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/l2Fmj7HuImg?si=3CxTMu_bc1LZA3sV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Animación</div>
-                            <div class="content-description">Juan Rodriguez</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/-uJ35NMKLIw?si=AvXh4YJeUX9MkBZx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Animación</div>
-                            <div class="content-description">Paula Buitrago</div>
-                        </div>
-                    </div>
-                    
-                    </div>
-            </section>
+            
+        <head>
+<body>
+    <section class="content-section category-content active" id="animacion">
+        <h2 class="section-title">Animación</h2>
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/2oruBcRYKW0?si=HWuDK48IJ9WVoG7m" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Animación</div>
+                    <div class="content-description">Sara Ordoñez</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/vsS_kp5luAE?si=Kfi1TJi5rZhWufng" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Animación</div>
+                    <div class="content-description">Diana Bonilla</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/SpV7a5Lp6UM?si=M_j_MjG1-nFzrwXC" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Animación</div>
+                    <div class="content-description">Juan Ardila</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/Mv9Wnpr8K9U?si=Nzd0Aj88WIL_Uc1Q" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Animación</div>
+                    <div class="content-description">Mateo Gomez</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/l2Fmj7HuImg?si=3CxTMu_bc1LZA3sV" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Animación</div>
+                    <div class="content-description">Juan Rodriguez</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/-uJ35NMKLIw?si=AvXh4YJeUX9MkBZx" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Animación</div>
+                    <div class="content-description">Paula Buitrago</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+        
 
             <!-- Cortometrajes Content -->
-            <section class="content-section category-content" id="cortometrajes">
-                <h2 class="section-title">Spots</h2>
-                <div class="content-grid">
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/aJGjuPMk7c8?si=21ZLH2Xp-y8B688r" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Spot</div>
-                            <div class="content-description">Spot publitero</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/GSaOHJdMNBo?si=HCJD4bhO0KoFMyBh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Spot</div>
-                            <div class="content-description">Spot Policromías</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/AHfsm6dWg7k?si=TYOeU-FRjOmNVQ9u" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Spot</div>
-                            <div class="content-description">Spot Metanoia</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/TexR9DbJnAs?si=no1Cz3GFztZ9Ynss" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Spot</div>
-                            <div class="content-description">Spot Disroler</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/tHzeoc_Dia0?si=bTD4NTvyrWyoYYyM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Spot</div>
-                            <div class="content-description"> Spot La cobija roja</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/RUrwVg751XE?si=SWnqKp5kSXSPzB86" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Spot</div>
-                            <div class="content-description">Spot Cenibox</div>
-                        </div>
-                    </div>
-                    </div>
-            </section>
+            <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sección de Spots - Responsive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(45deg, #ff0000, #0000ff, #ff0000, #0000ff);
+    background-size: 400% 400%;
+    animation: gradientMove 4s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+        .content-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #220000, #ffffff);
+            border-radius: 2px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #fffafa, #9c9fc5, #fefeff);
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+            overflow: hidden;
+            border-radius: 15px;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 15px;
+        }
+
+        .content-info {
+            padding: 20px 0 0 0;
+            text-align: center;
+        }
+
+        .content-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #000000e3;
+            margin-bottom: 8px;
+        }
+
+        .content-description {
+            font-size: 1rem;
+            color: #7f8c8d;
+            font-weight: 500;
+            position: relative;
+            padding: 8px 16px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecefb2);
+            border-radius: 25px;
+            display: inline-block;
+        }
+
+        /* Responsive breakpoints */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 30px 15px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 15px 0;
+            }
+
+            .content-card {
+                padding: 15px;
+                border-radius: 15px;
+            }
+
+            .video-container {
+                border-radius: 12px;
+            }
+
+            .content-title {
+                font-size: 1.2rem;
+            }
+
+            .content-description {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .content-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .content-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Animaciones */
+        .content-card {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .content-card:nth-child(1) { animation-delay: 0.1s; }
+        .content-card:nth-child(2) { animation-delay: 0.2s; }
+        .content-card:nth-child(3) { animation-delay: 0.3s; }
+        .content-card:nth-child(4) { animation-delay: 0.4s; }
+        .content-card:nth-child(5) { animation-delay: 0.5s; }
+        .content-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hover effects para desktop */
+        @media (hover: hover) {
+            .content-card:hover .content-title {
+                color: #a4aabb;
+            }
+
+            .content-card:hover .video-container {
+                transform: scale(1.02);
+            }
+
+            .video-container {
+                transition: transform 0.3s ease;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="content-section category-content" id="cortometrajes">
+        <h2 class="section-title">Spots</h2>
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/aJGjuPMk7c8?si=21ZLH2Xp-y8B688r" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Spot</div>
+                    <div class="content-description">Spot publitero</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/GSaOHJdMNBo?si=HCJD4bhO0KoFMyBh" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Spot</div>
+                    <div class="content-description">Spot Policromías</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/AHfsm6dWg7k?si=TYOeU-FRjOmNVQ9u" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Spot</div>
+                    <div class="content-description">Spot Metanoia</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/TexR9DbJnAs?si=no1Cz3GFztZ9Ynss" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Spot</div>
+                    <div class="content-description">Spot Disroler</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/tHzeoc_Dia0?si=bTD4NTvyrWyoYYyM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Spot</div>
+                    <div class="content-description">Spot La cobija roja</div>
+                </div>
+            </div>
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/RUrwVg751XE?si=SWnqKp5kSXSPzB86" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Spot</div>
+                    <div class="content-description">Spot Cenibox</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+
+            
             <!-- Filminutos Content -->
-            <section class="content-section category-content" id="filminutos">
-                <h2 class="section-title">Pitchs</h2>
-                <div class="content-grid">
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/QuvvyefL9As?si=kqO43wwuOASKpMGP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Pitch</div>
-                            <div class="content-description"> Pitch Audiovisual Munrage</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/kmxr1gsp7cY?si=xZEKNI7A3nIakDSD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Pitch</div>
-                            <div class="content-description">Pitch Femdi</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/bIga5JntNgI?si=bdevDDScmswX5qt6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Pitch</div>
-                            <div class="content-description">Pitch Metanoia</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/tCR8noiPhj8?si=7Y0R91bNXZI0BXUl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Pitch</div>
-                            <div class="content-description">Pitch Bacatart</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/NNNvAnC_G80?si=30TMAChoQVgi7oEB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Pitch</div>
-                            <div class="content-description">Pitch Zen</div>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <iframe width="250" height="315" src="https://www.youtube.com/embed/n_zB-uBtZrk?si=xknjRVky9H1ttZov" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <div class="content-info">
-                            <div class="content-title">Pitch</div>
-                            <div class="content-description">Pa´chicos pitch</div>
-                        </div>
-                    </div>
-                    </div>
-            </section>
+            <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitchs Responsive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #ffffff, #f1f1f1);
+            border-radius: 2px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.021);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.712);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .content-info {
+            padding: 20px;
+        }
+
+        .content-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .content-description {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Responsive Design */
+        
+        /* Desktop (1200px+) */
+        @media (min-width: 1200px) {
+            .content-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .section-title {
+                font-size: 3rem;
+            }
+        }
+
+        /* Tablet (768px - 1199px) */
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .content-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .content-card {
+                max-width: 100%;
+            }
+        }
+
+        /* Mobile (hasta 767px) */
+        @media (max-width: 767px) {
+            .content-section {
+                padding: 30px 15px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 30px;
+            }
+            
+            .content-card {
+                max-width: 100%;
+                margin: 0 auto;
+            }
+            
+            .content-info {
+                padding: 15px;
+            }
+            
+            .content-title {
+                font-size: 1.2rem;
+            }
+            
+            .content-description {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Mobile pequeño (hasta 480px) */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .content-section {
+                padding: 20px 10px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .content-grid {
+                gap: 15px;
+            }
+            
+            .content-info {
+                padding: 12px;
+            }
+        }
+
+        /* Mejoras adicionales para accesibilidad */
+        .content-card:focus-within {
+            outline: 3px solid #060024;
+            outline-offset: 2px;
+        }
+
+        iframe:focus {
+            outline: none;
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .content-card:nth-child(1) { animation-delay: 0.1s; }
+        .content-card:nth-child(2) { animation-delay: 0.2s; }
+        .content-card:nth-child(3) { animation-delay: 0.3s; }
+        .content-card:nth-child(4) { animation-delay: 0.4s; }
+        .content-card:nth-child(5) { animation-delay: 0.5s; }
+        .content-card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <section class="content-section category-content" id="filminutos">
+        <h2 class="section-title">Pitchs</h2>
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/QuvvyefL9As?si=kqO43wwuOASKpMGP" 
+                            title="YouTube video player" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Pitch</div>
+                    <div class="content-description">Pitch Audiovisual Munrage</div>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/kmxr1gsp7cY?si=xZEKNI7A3nIakDSD" 
+                            title="YouTube video player" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Pitch</div>
+                    <div class="content-description">Pitch Femdi</div>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/bIga5JntNgI?si=bdevDDScmswX5qt6" 
+                            title="YouTube video player" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Pitch</div>
+                    <div class="content-description">Pitch Metanoia</div>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/tCR8noiPhj8?si=7Y0R91bNXZI0BXUl" 
+                            title="YouTube video player" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Pitch</div>
+                    <div class="content-description">Pitch Bacatart</div>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/NNNvAnC_G80?si=30TMAChoQVgi7oEB" 
+                            title="YouTube video player" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Pitch</div>
+                    <div class="content-description">Pitch Zen</div>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/n_zB-uBtZrk?si=xknjRVky9H1ttZov" 
+                            title="YouTube video player" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="content-info">
+                    <div class="content-title">Pitch</div>
+                    <div class="content-description">Pa´chicos pitch</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
         </main>
 
         
@@ -1507,13 +2288,5 @@
         // Call on load
         window.addEventListener('load', initResponsiveCarousel);
     </script>
-
-        
-        
-
-
-            
-   
-
 </body>
 </html>
