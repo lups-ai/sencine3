@@ -75,7 +75,7 @@
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -93,7 +93,7 @@
 
         .content-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            box-shadow: 0 25px 50px rgba(255, 254, 254, 0.15);
         }
 
         .video-container {
@@ -229,6 +229,7 @@
        
     </style>
 </head>
+
 <body>
     <!DOCTYPE html>
 <html lang="es">
@@ -402,6 +403,179 @@
     </style>
 </head>
 <body>
+    <!-- Pantalla de carga SENCINE - Agregar donde necesites -->
+<div class="sencine-loading-screen">
+    <div class="sencine-logo-container">
+        <img src="imagenes/logo.png" alt="SENCINE Logo" class="sencine-logo-image">
+        <div class="sencine-loading-dots">
+            <div class="sencine-dot"></div>
+            <div class="sencine-dot"></div>
+            <div class="sencine-dot"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilos específicos para la pantalla de carga SENCINE */
+    .sencine-loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        animation: sencineLoadingFadeOut 0.8s ease-in-out 3s forwards;
+    }
+
+    .sencine-logo-container {
+        text-align: center;
+    }
+
+    .sencine-logo-image {
+        max-width: 300px;
+        width: 80vw;
+        height: auto;
+        filter: drop-shadow(0 0 20px rgba(229, 9, 20, 0.5));
+        animation: sencineLogoAnimation 2.5s ease-in-out;
+    }
+
+    .sencine-loading-dots {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .sencine-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #a50008;
+        margin: 0 4px;
+        animation: sencineLoadingDotPulse 1.5s infinite;
+    }
+
+    .sencine-dot:nth-child(1) { animation-delay: 0s; }
+    .sencine-dot:nth-child(2) { animation-delay: 0.3s; }
+    .sencine-dot:nth-child(3) { animation-delay: 0.6s; }
+
+    /* Animaciones específicas para SENCINE */
+    @keyframes sencineLogoAnimation {
+        0% {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes sencineLoadingDotPulse {
+        0%, 100% {
+            opacity: 0.3;
+            transform: scale(0.8);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+    }
+
+    @keyframes sencineLoadingFadeOut {
+        to {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    /* Responsive Design para SENCINE */
+    @media (max-width: 768px) {
+        .sencine-logo-image {
+            max-width: 250px;
+            width: 70vw;
+        }
+        
+        .sencine-dot {
+            width: 6px;
+            height: 6px;
+            margin: 0 3px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .sencine-logo-image {
+            max-width: 200px;
+            width: 60vw;
+        }
+        
+        .sencine-loading-dots {
+            margin-top: 20px;
+        }
+        
+        .sencine-dot {
+            width: 5px;
+            height: 5px;
+            margin: 0 2px;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .sencine-logo-image {
+            max-width: 150px;
+            width: 50vw;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .sencine-logo-image {
+            max-width: 400px;
+        }
+    }
+
+    @media (min-width: 1600px) {
+        .sencine-logo-image {
+            max-width: 500px;
+        }
+    }
+</style>
+
+<script>
+    // Función para ocultar la pantalla de carga manualmente
+    function hideSencineLoading() {
+        const loadingScreen = document.querySelector('.sencine-loading-screen');
+        if (loadingScreen) {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.visibility = 'hidden';
+        }
+    }
+
+    // Función para mostrar la pantalla de carga manualmente
+    function showSencineLoading() {
+        const loadingScreen = document.querySelector('.sencine-loading-screen');
+        if (loadingScreen) {
+            loadingScreen.style.animation = 'none';
+            loadingScreen.style.opacity = '1';
+            loadingScreen.style.visibility = 'visible';
+            
+            // Forzar reflow
+            loadingScreen.offsetHeight;
+            
+            // Reiniciar animación
+            loadingScreen.style.animation = 'sencineLoadingFadeOut 0.8s ease-in-out 3s forwards';
+        }
+    }
+
+    // Opcional: Auto-ocultar después de 3.8 segundos
+    // setTimeout(hideSencineLoading, 3800);
+</script>
     
     <!-- Menú Superior -->
     <div class="top-menu-container">
@@ -792,7 +966,7 @@
 <body>
     <header class="header">
         <h1 class="logo">
-            <img src="imagenes/logo.png" alt="Logo">
+            <img src="imagenes/logo.png" alt="Logo" >
         </h1>
         
     </header>
@@ -838,7 +1012,7 @@
             position: relative;
             overflow: hidden;
             border-radius: 15px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 251, 251, 0.05);
             backdrop-filter: blur(10px);
             padding: 20px 0;
         }
@@ -862,8 +1036,8 @@
 
         .top-viewed-card:hover {
             transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: rgb(44, 1, 1);
+            box-shadow: 0 20px 40px rgba(255, 254, 254, 0.3);
+            border-color: rgb(255, 255, 255);
         }
 
         .top-viewed-poster {
@@ -1345,7 +1519,7 @@
         <div class="content-grid">
             <div class="content-card">
                 <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/2oruBcRYKW0?si=HWuDK48IJ9WVoG7m" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/2oruBcRYKW0?si=Nn6GOG5rd2cc1M5F" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
                 <div class="content-info">
                     <div class="content-title">Animación</div>
